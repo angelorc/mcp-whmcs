@@ -1,0 +1,62 @@
+{
+  "name": "mcp-whmcs",
+  "version": "0.1.0",
+  "description": "MCP server for WHMCS: manage clients, services, orders, invoices, domains and tickets from Claude and other MCP clients",
+  "keywords": [
+    "billing",
+    "claude",
+    "hosting",
+    "mcp",
+    "model-context-protocol",
+    "whmcs"
+  ],
+  "homepage": "https://github.com/angelorc/mcp-whmcs#readme",
+  "bugs": {
+    "url": "https://github.com/angelorc/mcp-whmcs/issues"
+  },
+  "license": "MIT",
+  "author": "angelorc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelorc/mcp-whmcs.git"
+  },
+  "bin": {
+    "mcp-whmcs": "dist/index.js",
+    "whmcs-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --target node --format esm --minify --outfile dist/index.js && chmod +x dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "start": "bun src/index.ts",
+    "inspect": "bunx @modelcontextprotocol/inspector bun src/index.ts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "check": "bun run format:check && bun run lint && bun run typecheck"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@oxlint/plugins": "1.90.0",
+    "@types/bun": "^1.4.4",
+    "@types/node": "^24.19.2",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "typescript": "^5.9.3",
+    "zod": "^4.6.7"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
